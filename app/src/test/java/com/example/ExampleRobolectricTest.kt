@@ -22,9 +22,9 @@ class ExampleRobolectricTest {
     }
 
     @Test
-    fun `lesson catalog has 10 valid multi-step lessons`() {
+    fun `lesson catalog has 16 valid multi-step lessons`() {
         val lessons = LessonCatalog.allLessons
-        assertEquals(10, lessons.size)
+        assertEquals(16, lessons.size)
         lessons.forEach { lesson ->
             assertTrue("Lesson ${lesson.id} should have at least 5 steps", lesson.steps.size >= 5)
             lesson.steps.forEachIndexed { idx, step ->

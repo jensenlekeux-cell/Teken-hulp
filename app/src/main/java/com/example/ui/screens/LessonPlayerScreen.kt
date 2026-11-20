@@ -181,17 +181,16 @@ fun LessonPlayerScreen(
         }
     ) { innerPadding ->
         Column(
-            verticalArrangement = Arrangement.spacedBy(10.dp),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp, vertical = 6.dp)
+                .padding(horizontal = 16.dp)
         ) {
-            // Mode Switcher: "Op Papier" (Watch video) vs "Op Scherm" (Trace & Draw)
+            // Fixed Top Controls: Mode Switcher + Volgende stap bar (always visible without scrolling!)
             SingleChoiceSegmentedButtonRow(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(top = 4.dp)
                     .testTag("practice_mode_switcher")
             ) {
                 PracticeMode.entries.forEachIndexed { index, mode ->
@@ -222,156 +221,15 @@ fun LessonPlayerScreen(
                 }
             }
 
-            // Main Drawing / Animation Canvas Card
-            Surface(
-                shape = RoundedCornerShape(24.dp),
-                border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.outline),
-                tonalElevation = 2.dp,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1.02f)
-                    .clip(RoundedCornerShape(24.dp))
-                    .testTag("lesson_canvas_surface")
-            ) {
-                if (practiceMode == PracticeMode.ON_PAPER) {
-                    AnimatedTutorialCanvas(
-                        lesson = lesson,
-                        currentStepIndex = currentStepIndex,
-                        stepAnimationProgress = stepProgress,
-                        showConstructionLines = preferences.showConstructionLines,
-                        gridStyle = gridStyle,
-                        ghostMode = false,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                } else {
-                    InteractiveSketchCanvas(
-                        strokes = userStrokes,
-                        activeTool = activeTool,
-                        activeColorArgb = activeColorArgb,
-                        activeWidthDp = activeWidthDp,
-                        gridStyle = gridStyle,
-                        onAddStroke = { newStroke ->
-                            userStrokes = userStrokes + newStroke
-                            redoStack = emptyList()
-                        },
-                        underlayContent = {
-                            if (ghostAlpha > 0.01f) {
-                                AnimatedTutorialCanvas(
-                                    lesson = lesson,
-                                    currentStepIndex = currentStepIndex,
-                                    stepAnimationProgress = stepProgress,
-                                    showConstructionLines = preferences.showConstructionLines,
-                                    gridStyle = PaperGridStyle.NONE,
-                                    ghostMode = true,
-                                    ghostAlpha = ghostAlpha,
-                                    modifier = Modifier.fillMaxSize()
-                                )
-                            }
-                        },
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-            }
+            Spacer(modifier = Modifier.height(8.dp))
 
-            // Video-style Playback Controls
-            VideoPlaybackControlsBar(
-                isPlaying = isPlaying,
-                autoPlayAll = autoPlayAll,
-                stepProgress = stepProgress,
-                playbackSpeed = preferences.playbackSpeed,
-                showConstructionLines = preferences.showConstructionLines,
-                showGrid = preferences.showGrid,
-                practiceMode = practiceMode,
-                ghostAlpha = ghostAlpha,
-                onTogglePlay = {
-                    if (!isPlaying && stepProgress >= 0.999f) {
-                        stepProgress = 0f
-                    }
-                    isPlaying = !isPlaying
-                },
-                onReplayStep = {
-                    stepProgress = 0f
-                    isPlaying = true
-                    replayTrigger++
-                },
-                onSeekProgress = { newProgress ->
-                    isPlaying = false
-                    stepProgress = newProgress
-                },
-                onToggleAutoPlayAll = {
-                    autoPlayAll = !autoPlayAll
-                    if (autoPlayAll && !isPlaying) {
-                        if (stepProgress >= 0.999f && currentStepIndex < lesson.steps.lastIndex) {
-                            currentStepIndex += 1
-                            stepProgress = 0f
-                        }
-                        isPlaying = true
-                    }
-                },
-                onCycleSpeed = onCycleSpeed,
-                onToggleConstruction = { onToggleConstructionLines(!preferences.showConstructionLines) },
-                onToggleGrid = { onToggleGrid(!preferences.showGrid) },
-                onCycleGhostAlpha = {
-                    ghostAlpha = when {
-                        ghostAlpha > 0.25f -> 0.14f
-                        ghostAlpha > 0.01f -> 0f
-                        else -> 0.32f
-                    }
-                }
-            )
-
-            // Drawing Toolbar when in "Op Scherm" mode
-            if (practiceMode == PracticeMode.ON_SCREEN) {
-                StudioDrawingToolbar(
-                    activeTool = activeTool,
-                    activeColorArgb = activeColorArgb,
-                    activeWidthDp = activeWidthDp,
-                    canUndo = userStrokes.isNotEmpty(),
-                    canRedo = redoStack.isNotEmpty(),
-                    hasStrokes = userStrokes.isNotEmpty(),
-                    onSelectTool = { activeTool = it },
-                    onSelectColor = {
-                        activeColorArgb = it
-                        if (activeTool == BrushTool.ERASER) activeTool = BrushTool.PENCIL
-                    },
-                    onSelectWidth = { activeWidthDp = it },
-                    onUndo = {
-                        if (userStrokes.isNotEmpty()) {
-                            redoStack = redoStack + userStrokes.last()
-                            userStrokes = userStrokes.dropLast(1)
-                        }
-                    },
-                    onRedo = {
-                        if (redoStack.isNotEmpty()) {
-                            userStrokes = userStrokes + redoStack.last()
-                            redoStack = redoStack.dropLast(1)
-                        }
-                    },
-                    onClear = {
-                        userStrokes = emptyList()
-                        redoStack = emptyList()
-                    },
-                    onShare = {
-                        shareDrawingAsPng(context, userStrokes, lesson.title)
-                    }
-                )
-            }
-
-            // Step Instruction Card with Dutch Read-Aloud
-            StepInstructionCard(
-                step = currentStep,
+            TopStepNavigationBar(
                 totalSteps = lesson.steps.size,
                 currentIndex = currentStepIndex,
                 onSelectStep = { idx ->
                     currentStepIndex = idx.coerceIn(0, lesson.steps.lastIndex)
                     stepProgress = 0f
                     isPlaying = true
-                },
-                onSpeakInstruction = {
-                    if (ttsReady) {
-                        val spokenText = "Stap ${currentStep.stepNumber}. ${currentStep.title}. ${currentStep.instruction}"
-                        tts.speak(spokenText, TextToSpeech.QUEUE_FLUSH, null, "step_${currentStep.stepNumber}")
-                    }
                 },
                 onPrevious = {
                     if (currentStepIndex > 0) {
@@ -392,7 +250,164 @@ fun LessonPlayerScreen(
                 }
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Column(
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                // Main Drawing / Animation Canvas Card
+                Surface(
+                    shape = RoundedCornerShape(24.dp),
+                    border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.outline),
+                    tonalElevation = 2.dp,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1.02f)
+                        .clip(RoundedCornerShape(24.dp))
+                        .testTag("lesson_canvas_surface")
+                ) {
+                    if (practiceMode == PracticeMode.ON_PAPER) {
+                        AnimatedTutorialCanvas(
+                            lesson = lesson,
+                            currentStepIndex = currentStepIndex,
+                            stepAnimationProgress = stepProgress,
+                            showConstructionLines = preferences.showConstructionLines,
+                            gridStyle = gridStyle,
+                            ghostMode = false,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    } else {
+                        InteractiveSketchCanvas(
+                            strokes = userStrokes,
+                            activeTool = activeTool,
+                            activeColorArgb = activeColorArgb,
+                            activeWidthDp = activeWidthDp,
+                            gridStyle = gridStyle,
+                            onAddStroke = { newStroke ->
+                                userStrokes = userStrokes + newStroke
+                                redoStack = emptyList()
+                            },
+                            underlayContent = {
+                                if (ghostAlpha > 0.01f) {
+                                    AnimatedTutorialCanvas(
+                                        lesson = lesson,
+                                        currentStepIndex = currentStepIndex,
+                                        stepAnimationProgress = stepProgress,
+                                        showConstructionLines = preferences.showConstructionLines,
+                                        gridStyle = PaperGridStyle.NONE,
+                                        ghostMode = true,
+                                        ghostAlpha = ghostAlpha,
+                                        modifier = Modifier.fillMaxSize()
+                                    )
+                                }
+                            },
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
+                }
+
+                // Video-style Playback Controls
+                VideoPlaybackControlsBar(
+                    isPlaying = isPlaying,
+                    autoPlayAll = autoPlayAll,
+                    stepProgress = stepProgress,
+                    playbackSpeed = preferences.playbackSpeed,
+                    showConstructionLines = preferences.showConstructionLines,
+                    showGrid = preferences.showGrid,
+                    practiceMode = practiceMode,
+                    ghostAlpha = ghostAlpha,
+                    onTogglePlay = {
+                        if (!isPlaying && stepProgress >= 0.999f) {
+                            stepProgress = 0f
+                        }
+                        isPlaying = !isPlaying
+                    },
+                    onReplayStep = {
+                        stepProgress = 0f
+                        isPlaying = true
+                        replayTrigger++
+                    },
+                    onSeekProgress = { newProgress ->
+                        isPlaying = false
+                        stepProgress = newProgress
+                    },
+                    onToggleAutoPlayAll = {
+                        autoPlayAll = !autoPlayAll
+                        if (autoPlayAll && !isPlaying) {
+                            if (stepProgress >= 0.999f && currentStepIndex < lesson.steps.lastIndex) {
+                                currentStepIndex += 1
+                                stepProgress = 0f
+                            }
+                            isPlaying = true
+                        }
+                    },
+                    onCycleSpeed = onCycleSpeed,
+                    onToggleConstruction = { onToggleConstructionLines(!preferences.showConstructionLines) },
+                    onToggleGrid = { onToggleGrid(!preferences.showGrid) },
+                    onCycleGhostAlpha = {
+                        ghostAlpha = when {
+                            ghostAlpha > 0.25f -> 0.14f
+                            ghostAlpha > 0.01f -> 0f
+                            else -> 0.32f
+                        }
+                    }
+                )
+
+                // Drawing Toolbar when in "Op Scherm" mode
+                if (practiceMode == PracticeMode.ON_SCREEN) {
+                    StudioDrawingToolbar(
+                        activeTool = activeTool,
+                        activeColorArgb = activeColorArgb,
+                        activeWidthDp = activeWidthDp,
+                        canUndo = userStrokes.isNotEmpty(),
+                        canRedo = redoStack.isNotEmpty(),
+                        hasStrokes = userStrokes.isNotEmpty(),
+                        onSelectTool = { activeTool = it },
+                        onSelectColor = {
+                            activeColorArgb = it
+                            if (activeTool == BrushTool.ERASER) activeTool = BrushTool.PENCIL
+                        },
+                        onSelectWidth = { activeWidthDp = it },
+                        onUndo = {
+                            if (userStrokes.isNotEmpty()) {
+                                redoStack = redoStack + userStrokes.last()
+                                userStrokes = userStrokes.dropLast(1)
+                            }
+                        },
+                        onRedo = {
+                            if (redoStack.isNotEmpty()) {
+                                userStrokes = userStrokes + redoStack.last()
+                                redoStack = redoStack.dropLast(1)
+                            }
+                        },
+                        onClear = {
+                            userStrokes = emptyList()
+                            redoStack = emptyList()
+                        },
+                        onShare = {
+                            shareDrawingAsPng(context, userStrokes, lesson.title)
+                        }
+                    )
+                }
+
+                // Step Instruction Card with Dutch Read-Aloud
+                StepInstructionCard(
+                    step = currentStep,
+                    totalSteps = lesson.steps.size,
+                    onSpeakInstruction = {
+                        if (ttsReady) {
+                            val spokenText = "Stap ${currentStep.stepNumber}. ${currentStep.title}. ${currentStep.instruction}"
+                            tts.speak(spokenText, TextToSpeech.QUEUE_FLUSH, null, "step_${currentStep.stepNumber}")
+                        }
+                    }
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+            }
         }
     }
 

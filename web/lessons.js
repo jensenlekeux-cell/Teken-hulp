@@ -638,10 +638,370 @@ export const LESSONS = [
       {
         stepNumber: 6,
         title: 'Textuur & schaduw',
-        instruction: 'Zet kleine streepjes op het handvat en een lijntje onder de camera. Je hebt alle 10 lessen uitgespeeld!',
+        instruction: 'Zet kleine streepjes op het handvat en een lijntje onder de camera. Je hebt alle lessen uitgespeeld!',
         tip: 'Wat een meesterwerk — download je tekening of probeer hem uit je hoofd!',
         strokes: [
           { kind: 'SHADING', cmds: [['M', 0.20, 0.49], ['L', 0.25, 0.46], ['M', 0.20, 0.55], ['L', 0.25, 0.52], ['M', 0.20, 0.61], ['L', 0.25, 0.58], ['M', 0.20, 0.67], ['L', 0.25, 0.64], ['M', 0.20, 0.77], ['L', 0.80, 0.77]] }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'raket_ruimte',
+    title: 'Ruimteraket',
+    subtitle: 'Vlieg naar de sterren met een stoere raket en vlammen.',
+    category: 'DINGEN',
+    categoryLabel: 'Dingen',
+    difficulty: 'MAKKELIJK',
+    difficultyLabel: 'Makkelijk',
+    durationMinutes: 5,
+    pathOrder: 11,
+    accentHex: '#d0552b',
+    steps: [
+      {
+        stepNumber: 1,
+        title: 'Middenlijn en raketromp',
+        instruction: 'Teken een verticale middenlijn en daar omheen een grote puntige boog voor de romp van de raket.',
+        tip: 'Maak hem lekker spits bovenaan zodat hij snel door de ruimte vliegt!',
+        strokes: [
+          { kind: 'CONSTRUCTION', cmds: [['M', 0.50, 0.12], ['L', 0.50, 0.88]] },
+          { kind: 'OUTLINE', cmds: [['M', 0.50, 0.16], ['C', 0.36, 0.30, 0.35, 0.52, 0.40, 0.68], ['L', 0.60, 0.68], ['C', 0.65, 0.52, 0.64, 0.30, 0.50, 0.16]] }
+        ]
+      },
+      {
+        stepNumber: 2,
+        title: 'Neuskegel en patrijspoort',
+        instruction: 'Zet een gebogen streep onder de punt en teken een groot rond raampje in het midden.',
+        tip: 'Teken nog een kleiner cirkeltje in het raam voor de metalen rand.',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['M', 0.41, 0.31], ['Q', 0.50, 0.34, 0.59, 0.31], ['circle', 0.50, 0.46, 0.075], ['circle', 0.50, 0.46, 0.052]] }
+        ]
+      },
+      {
+        stepNumber: 3,
+        title: 'De drie zijvinnen',
+        instruction: 'Teken links en rechts twee gebogen vinnen en één smalle middenvin onderaan.',
+        tip: 'De vinnen zorgen dat de raket mooi rechtop kan staan.',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['M', 0.38, 0.54], ['C', 0.27, 0.59, 0.26, 0.70, 0.31, 0.75], ['Q', 0.36, 0.70, 0.40, 0.67], ['M', 0.62, 0.54], ['C', 0.73, 0.59, 0.74, 0.70, 0.69, 0.75], ['Q', 0.64, 0.70, 0.60, 0.67], ['M', 0.50, 0.58], ['L', 0.50, 0.73]] }
+        ]
+      },
+      {
+        stepNumber: 4,
+        title: 'Grote raketvlammen',
+        instruction: 'Teken uit de onderkant golvende vuurvlammen die naar een punt lopen.',
+        tip: 'Zet een kleinere vlam in het midden voor extra kracht!',
+        strokes: [
+          { kind: 'DETAIL', cmds: [['M', 0.42, 0.68], ['C', 0.38, 0.77, 0.44, 0.84, 0.50, 0.89], ['C', 0.56, 0.84, 0.62, 0.77, 0.58, 0.68], ['M', 0.46, 0.69], ['Q', 0.50, 0.80, 0.54, 0.69]] }
+        ]
+      },
+      {
+        stepNumber: 5,
+        title: 'Sterretjes & glans',
+        instruction: 'Teken fonkelende sterretjes om de raket heen en een lichtstreepje op het glas.',
+        tip: '3, 2, 1... lancering! Supergetekend!',
+        strokes: [
+          { kind: 'DETAIL', cmds: [['M', 0.22, 0.25], ['L', 0.22, 0.31], ['M', 0.19, 0.28], ['L', 0.25, 0.28], ['M', 0.77, 0.23], ['L', 0.77, 0.29], ['M', 0.74, 0.26], ['L', 0.80, 0.26], ['circle', 0.20, 0.46, 0.015], ['circle', 0.80, 0.47, 0.015], ['arc', 0.50, 0.46, 0.032, 0.032, 200, 70]] }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'vrolijke_dino',
+    title: 'Lieve Dinosaurus',
+    subtitle: 'Een vriendelijke langnek-dino met ronde pootjes en vlekjes.',
+    category: 'DIEREN',
+    categoryLabel: 'Dieren',
+    difficulty: 'MAKKELIJK',
+    difficultyLabel: 'Makkelijk',
+    durationMinutes: 6,
+    pathOrder: 12,
+    accentHex: '#477856',
+    steps: [
+      {
+        stepNumber: 1,
+        title: 'Groot ei voor het lijf & klein kopje',
+        instruction: 'Teken rechtsonder een liggend ovaal voor het lijfje en linksboven een klein ovaaltje voor het kopje.',
+        tip: 'Laat genoeg ruimte ertussen voor de lange nek!',
+        strokes: [
+          { kind: 'CONSTRUCTION', cmds: [['oval', 0.53, 0.61, 0.21, 0.14], ['oval', 0.25, 0.28, 0.09, 0.065]] }
+        ]
+      },
+      {
+        stepNumber: 2,
+        title: 'Kop, lange nek & rug',
+        instruction: 'Verbind het ronde kopje met een sierlijke lange S-bocht naar de bolle rug van je dino.',
+        tip: 'Teken deze lijn rustig in één vloeiende beweging.',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['M', 0.25, 0.34], ['C', 0.14, 0.34, 0.14, 0.21, 0.26, 0.21], ['C', 0.35, 0.21, 0.34, 0.39, 0.37, 0.50], ['C', 0.48, 0.44, 0.68, 0.46, 0.74, 0.58]] }
+        ]
+      },
+      {
+        stepNumber: 3,
+        title: 'Lange staart & dikke buik',
+        instruction: 'Trek vanaf het ruggetje een puntige staart naar rechts en sluit de onderkant langs de buik naar de nek.',
+        tip: 'Maak de punt van de staart een beetje omhoog gekruld.',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['M', 0.74, 0.58], ['C', 0.84, 0.62, 0.89, 0.58, 0.90, 0.53], ['C', 0.87, 0.65, 0.78, 0.72, 0.66, 0.73], ['M', 0.28, 0.33], ['C', 0.31, 0.48, 0.28, 0.65, 0.38, 0.72]] }
+        ]
+      },
+      {
+        stepNumber: 4,
+        title: 'Vier stevige dino-pootjes',
+        instruction: 'Teken twee voorpootjes en twee achterpootjes onder het lijfje, met daartussen de buiklijn.',
+        tip: 'Geef elke poot onderaan een plat voetje zodat hij goed staat.',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['M', 0.38, 0.72], ['L', 0.38, 0.84], ['L', 0.45, 0.84], ['L', 0.46, 0.74], ['Q', 0.53, 0.76, 0.60, 0.74], ['L', 0.60, 0.84], ['L', 0.67, 0.84], ['L', 0.67, 0.72], ['M', 0.47, 0.75], ['L', 0.48, 0.82], ['L', 0.53, 0.82], ['L', 0.53, 0.75]] }
+        ]
+      },
+      {
+        stepNumber: 5,
+        title: 'Oogje, lach & dino-vlekjes',
+        instruction: 'Teken een lief oogje, een klein glimlachje en een paar ronde vlekjes op zijn rug!',
+        tip: 'Superleuk! Je lieve dino is klaar.',
+        strokes: [
+          { kind: 'DETAIL', cmds: [['circle', 0.23, 0.26, 0.016], ['M', 0.17, 0.30], ['Q', 0.21, 0.32, 0.25, 0.30], ['circle', 0.52, 0.56, 0.032], ['circle', 0.61, 0.61, 0.024], ['circle', 0.45, 0.61, 0.020]] },
+          { kind: 'SHADING', cmds: [['M', 0.34, 0.86], ['L', 0.73, 0.86]] }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'eenvoudig_kasteel',
+    title: 'Sprookjeskasteel',
+    subtitle: 'Bouw een groot kasteel met torens, vlaggetjes en een boogpoort.',
+    category: 'DINGEN',
+    categoryLabel: 'Dingen',
+    difficulty: 'GEMIDDELD',
+    difficultyLabel: 'Gemiddeld',
+    durationMinutes: 8,
+    pathOrder: 13,
+    accentHex: '#3b6e8c',
+    steps: [
+      {
+        stepNumber: 1,
+        title: 'Drie basisblokken',
+        instruction: 'Teken een lage brede muur in het midden en links en rechts twee hogere smalle torens.',
+        tip: 'Met drie simpele rechthoeken staat je hele kasteel meteen recht!',
+        strokes: [
+          { kind: 'CONSTRUCTION', cmds: [['M', 0.50, 0.14], ['L', 0.50, 0.84]] },
+          { kind: 'OUTLINE', cmds: [['M', 0.20, 0.44], ['L', 0.34, 0.44], ['L', 0.34, 0.82], ['L', 0.20, 0.82], ['L', 0.20, 0.44], ['M', 0.66, 0.44], ['L', 0.80, 0.44], ['L', 0.80, 0.82], ['L', 0.66, 0.82], ['L', 0.66, 0.44], ['M', 0.34, 0.56], ['L', 0.66, 0.56], ['M', 0.34, 0.82], ['L', 0.66, 0.82]] }
+        ]
+      },
+      {
+        stepNumber: 2,
+        title: 'De hoge middentoren',
+        instruction: 'Teken achter de muur een grote hoge middentoren die boven alles uitsteekt.',
+        tip: 'Maak hem net iets breder dan de zijtorens.',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['M', 0.41, 0.56], ['L', 0.41, 0.34], ['L', 0.59, 0.34], ['L', 0.59, 0.56]] }
+        ]
+      },
+      {
+        stepNumber: 3,
+        title: 'Puntdaken en wapperende vlaggen',
+        instruction: 'Zet op elke toren een puntig driehoekig dak en bovenop vrolijke vlaggetjes!',
+        tip: 'Maak de daken iets breder dan de torens zodat ze mooi oversteken.',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['M', 0.18, 0.44], ['L', 0.27, 0.27], ['L', 0.36, 0.44], ['M', 0.64, 0.44], ['L', 0.73, 0.27], ['L', 0.82, 0.44], ['M', 0.39, 0.34], ['L', 0.50, 0.16], ['L', 0.61, 0.34], ['M', 0.27, 0.27], ['L', 0.27, 0.20], ['L', 0.33, 0.22], ['L', 0.27, 0.24], ['M', 0.50, 0.16], ['L', 0.50, 0.09], ['L', 0.57, 0.11], ['L', 0.50, 0.13], ['M', 0.73, 0.27], ['L', 0.73, 0.20], ['L', 0.79, 0.22], ['L', 0.73, 0.24]] }
+        ]
+      },
+      {
+        stepNumber: 4,
+        title: 'Kantelen & grote kasteelpoort',
+        instruction: 'Teken blokjes (kantelen) boven op de middenmuur en een grote ronde poort onderaan.',
+        tip: 'Teken verticale strepen in de poort zodat het net houten planken lijken.',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['M', 0.34, 0.56], ['L', 0.34, 0.52], ['L', 0.39, 0.52], ['L', 0.39, 0.56], ['M', 0.61, 0.56], ['L', 0.61, 0.52], ['L', 0.66, 0.52], ['L', 0.66, 0.56], ['M', 0.43, 0.82], ['L', 0.43, 0.69], ['C', 0.43, 0.61, 0.57, 0.61, 0.57, 0.69], ['L', 0.57, 0.82]] }
+        ]
+      },
+      {
+        stepNumber: 5,
+        title: 'Raampjes & stenen',
+        instruction: 'Zet kleine boograampjes in de torens, planklijnen op de poort en een paar baksteentjes.',
+        tip: 'Je eigen sprookjeskasteel staat klaar!',
+        strokes: [
+          { kind: 'DETAIL', cmds: [['M', 0.47, 0.64], ['L', 0.47, 0.82], ['M', 0.50, 0.63], ['L', 0.50, 0.82], ['M', 0.53, 0.64], ['L', 0.53, 0.82], ['M', 0.25, 0.56], ['L', 0.25, 0.51], ['Q', 0.27, 0.48, 0.29, 0.51], ['L', 0.29, 0.56], ['M', 0.71, 0.56], ['L', 0.71, 0.51], ['Q', 0.73, 0.48, 0.75, 0.51], ['L', 0.75, 0.56], ['M', 0.48, 0.45], ['L', 0.48, 0.40], ['Q', 0.50, 0.37, 0.52, 0.40], ['L', 0.52, 0.45]] },
+          { kind: 'SHADING', cmds: [['M', 0.23, 0.68], ['L', 0.30, 0.68], ['M', 0.69, 0.73], ['L', 0.76, 0.73], ['M', 0.14, 0.83], ['L', 0.86, 0.83]] }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'lieve_vlinder',
+    title: 'Lieve Vlinder',
+    subtitle: 'Teken grote mooie vleugels links en rechts precies in spiegelbeeld.',
+    category: 'NATUUR',
+    categoryLabel: 'Natuur',
+    difficulty: 'MAKKELIJK',
+    difficultyLabel: 'Makkelijk',
+    durationMinutes: 5,
+    pathOrder: 14,
+    accentHex: '#d69a2d',
+    steps: [
+      {
+        stepNumber: 1,
+        title: 'Middenlijn en vlinderlijfje',
+        instruction: 'Teken een verticale lijn, een klein rond kopje bovenaan en een langwerpig lijfje.',
+        tip: 'De middenlijn zorgt dat beide vleugels mooi even groot worden!',
+        strokes: [
+          { kind: 'CONSTRUCTION', cmds: [['M', 0.50, 0.14], ['L', 0.50, 0.84]] },
+          { kind: 'OUTLINE', cmds: [['circle', 0.50, 0.31, 0.045], ['oval', 0.50, 0.54, 0.038, 0.19]] }
+        ]
+      },
+      {
+        stepNumber: 2,
+        title: 'Twee grote bovenvleugels',
+        instruction: 'Teken vanuit het bovenste lijfje links en rechts een grote ronde vleugel omhoog.',
+        tip: 'Kijk goed hoe hoog je links gaat zodat rechts net zo hoog wordt.',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['M', 0.46, 0.42], ['C', 0.28, 0.16, 0.12, 0.28, 0.21, 0.48], ['C', 0.26, 0.56, 0.39, 0.54, 0.46, 0.51], ['M', 0.54, 0.42], ['C', 0.72, 0.16, 0.88, 0.28, 0.79, 0.48], ['C', 0.74, 0.56, 0.61, 0.54, 0.54, 0.51]] }
+        ]
+      },
+      {
+        stepNumber: 3,
+        title: 'Twee ondervleugels',
+        instruction: 'Teken onder de bovenvleugels links en rechts twee druppelvormige ondervleugels.',
+        tip: 'Maak ze iets kleiner dan de bovenvleugels!',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['M', 0.46, 0.53], ['C', 0.25, 0.54, 0.22, 0.76, 0.36, 0.78], ['C', 0.44, 0.79, 0.47, 0.69, 0.46, 0.62], ['M', 0.54, 0.53], ['C', 0.75, 0.54, 0.78, 0.76, 0.64, 0.78], ['C', 0.56, 0.79, 0.53, 0.69, 0.54, 0.62]] }
+        ]
+      },
+      {
+        stepNumber: 4,
+        title: 'Krullende voelsprieten',
+        instruction: 'Teken twee gekrulde voelsprieten op het kopje met een klein bolletje aan het eind.',
+        tip: 'Voeg ook twee lieve oogjes en een glimlachje toe als je wilt!',
+        strokes: [
+          { kind: 'DETAIL', cmds: [['M', 0.48, 0.27], ['C', 0.44, 0.18, 0.38, 0.16, 0.36, 0.20], ['circle', 0.36, 0.20, 0.012], ['M', 0.52, 0.27], ['C', 0.56, 0.18, 0.62, 0.16, 0.64, 0.20], ['circle', 0.64, 0.20, 0.012]] }
+        ]
+      },
+      {
+        stepNumber: 5,
+        title: 'Vrolijke vleugelstippen',
+        instruction: 'Versier de vleugels met grote en kleine stippen en streepjes op het lijf.',
+        tip: 'In Teken Op Scherm kun je de stippen in allerlei kleuren inkleuren!',
+        strokes: [
+          { kind: 'DETAIL', cmds: [['circle', 0.28, 0.37, 0.052], ['circle', 0.72, 0.37, 0.052], ['circle', 0.36, 0.66, 0.036], ['circle', 0.64, 0.66, 0.036], ['M', 0.47, 0.48], ['L', 0.53, 0.48], ['M', 0.47, 0.55], ['L', 0.53, 0.55], ['M', 0.47, 0.62], ['L', 0.53, 0.62]] }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'lekker_ijsje',
+    title: 'IJsje met Drie Bolletjes',
+    subtitle: 'Een vrolijk ijshoorntje met drie bolletjes, spikkels en een kers!',
+    category: 'DINGEN',
+    categoryLabel: 'Dingen',
+    difficulty: 'MAKKELIJK',
+    difficultyLabel: 'Makkelijk',
+    durationMinutes: 5,
+    pathOrder: 15,
+    accentHex: '#d0552b',
+    steps: [
+      {
+        stepNumber: 1,
+        title: 'De driehoek van het hoorntje',
+        instruction: 'Teken onderaan een grote driehoek op z’n kop met een randje erbovenop.',
+        tip: 'Een omgekeerde ijshoorn-driehoek is supermakkelijk om mee te beginnen.',
+        strokes: [
+          { kind: 'CONSTRUCTION', cmds: [['M', 0.50, 0.14], ['L', 0.50, 0.88]] },
+          { kind: 'OUTLINE', cmds: [['M', 0.35, 0.56], ['L', 0.65, 0.56], ['L', 0.50, 0.86], ['L', 0.35, 0.56]] }
+        ]
+      },
+      {
+        stepNumber: 2,
+        title: 'Twee onderste ijsbolletjes',
+        instruction: 'Teken op het hoorntje twee dikke ronde bollen naast elkaar met golvende smeltrandjes.',
+        tip: 'Golflijntjes onderaan de bolletjes laten ze heerlijk zacht lijken!',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['arc', 0.41, 0.48, 0.105, 0.10, 165, 200], ['arc', 0.59, 0.48, 0.105, 0.10, 175, 200], ['M', 0.32, 0.54], ['Q', 0.37, 0.59, 0.42, 0.55], ['Q', 0.50, 0.60, 0.57, 0.55], ['Q', 0.63, 0.59, 0.68, 0.54]] }
+        ]
+      },
+      {
+        stepNumber: 3,
+        title: 'Derde bolletje & kers op top',
+        instruction: 'Zet midden bovenop het derde bolletje met een lekkere ronde kers en steeltje!',
+        tip: 'Welke smaak krijgen de drie bolletjes? Aardbei, vanille of chocola?',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['arc', 0.50, 0.33, 0.115, 0.105, 165, 210], ['M', 0.39, 0.37], ['Q', 0.45, 0.42, 0.50, 0.39], ['Q', 0.55, 0.42, 0.61, 0.37], ['circle', 0.50, 0.20, 0.036], ['M', 0.50, 0.17], ['Q', 0.53, 0.12, 0.57, 0.12]] }
+        ]
+      },
+      {
+        stepNumber: 4,
+        title: 'Wafelruitjes op het hoorntje',
+        instruction: 'Teken schuine streepjes eerst de ene kant op, en dan kruislings de andere kant op.',
+        tip: 'Zo maak je meteen een echt krokant wafelijsje!',
+        strokes: [
+          { kind: 'DETAIL', cmds: [['M', 0.39, 0.64], ['L', 0.56, 0.56], ['M', 0.43, 0.72], ['L', 0.62, 0.62], ['M', 0.47, 0.79], ['L', 0.56, 0.74], ['M', 0.61, 0.64], ['L', 0.44, 0.56], ['M', 0.57, 0.72], ['L', 0.38, 0.62], ['M', 0.53, 0.79], ['L', 0.44, 0.74]] }
+        ]
+      },
+      {
+        stepNumber: 5,
+        title: 'Spikkels & glans',
+        instruction: 'Strooi vrolijke discodip-spikkels over het ijs en zet een glansboogje op de kers.',
+        tip: 'Mmm, ziet er heerlijk uit!',
+        strokes: [
+          { kind: 'DETAIL', cmds: [['M', 0.45, 0.29], ['L', 0.47, 0.31], ['M', 0.54, 0.28], ['L', 0.53, 0.31], ['M', 0.50, 0.34], ['L', 0.52, 0.35], ['M', 0.38, 0.45], ['L', 0.40, 0.47], ['M', 0.60, 0.45], ['L', 0.58, 0.47], ['arc', 0.50, 0.20, 0.018, 0.018, 200, 65]] }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'vrolijke_zon',
+    title: 'Zon & Regenboog',
+    subtitle: 'Teken donzige wolken, een grote regenboog en een vrolijke zon.',
+    category: 'NATUUR',
+    categoryLabel: 'Natuur',
+    difficulty: 'MAKKELIJK',
+    difficultyLabel: 'Makkelijk',
+    durationMinutes: 5,
+    pathOrder: 16,
+    accentHex: '#d69a2d',
+    steps: [
+      {
+        stepNumber: 1,
+        title: 'Twee wolkjes onderaan',
+        instruction: 'Teken linksonder en rechtsonder twee zachte wolkjes met een platte onderkant.',
+        tip: 'De regenboog komt zometeen precies tussen de twee wolkjes!',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['M', 0.14, 0.74], ['C', 0.10, 0.65, 0.20, 0.59, 0.26, 0.64], ['C', 0.30, 0.57, 0.42, 0.60, 0.40, 0.68], ['C', 0.45, 0.70, 0.44, 0.76, 0.38, 0.76], ['L', 0.16, 0.76], ['M', 0.60, 0.76], ['C', 0.55, 0.71, 0.58, 0.63, 0.64, 0.64], ['C', 0.68, 0.57, 0.80, 0.59, 0.79, 0.67], ['C', 0.86, 0.67, 0.88, 0.75, 0.82, 0.76], ['L', 0.60, 0.76]] }
+        ]
+      },
+      {
+        stepNumber: 2,
+        title: 'De grote regenboog-bogen',
+        instruction: 'Teken vier grote regenboog-bogen naast elkaar van de ene wolk naar de andere.',
+        tip: 'Volg elke keer rustig het boogje erboven!',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['arc', 0.50, 0.66, 0.26, 0.26, 190, 160], ['arc', 0.50, 0.66, 0.22, 0.22, 190, 160], ['arc', 0.50, 0.66, 0.18, 0.18, 190, 160], ['arc', 0.50, 0.66, 0.14, 0.14, 190, 160]] }
+        ]
+      },
+      {
+        stepNumber: 3,
+        title: 'De grote cirkelzon',
+        instruction: 'Teken linksboven een mooie ronde cirkel voor het zonnetje.',
+        tip: 'Zo kijkt hij vrolijk over de regenboog heen!',
+        strokes: [
+          { kind: 'OUTLINE', cmds: [['circle', 0.24, 0.26, 0.10]] }
+        ]
+      },
+      {
+        stepNumber: 4,
+        title: 'Zonnestralen rondom',
+        instruction: 'Teken vrolijke lange en korte zonnestralen rond het zonnetje.',
+        tip: 'Wissel rechte en schuine straaltjes af!',
+        strokes: [
+          { kind: 'DETAIL', cmds: [['M', 0.24, 0.13], ['L', 0.24, 0.08], ['M', 0.24, 0.39], ['L', 0.24, 0.44], ['M', 0.11, 0.26], ['L', 0.06, 0.26], ['M', 0.37, 0.26], ['L', 0.42, 0.26], ['M', 0.15, 0.17], ['L', 0.11, 0.13], ['M', 0.33, 0.17], ['L', 0.37, 0.13], ['M', 0.15, 0.35], ['L', 0.11, 0.39], ['M', 0.33, 0.35], ['L', 0.37, 0.39]] }
+        ]
+      },
+      {
+        stepNumber: 5,
+        title: 'Vrolijk gezichtje op de zon',
+        instruction: 'Teken twee oogjes en een grote blije glimlach op de zon (en kleur de regenboog in!).',
+        tip: 'Wat een stralende tekening — geweldig gedaan!',
+        strokes: [
+          { kind: 'DETAIL', cmds: [['circle', 0.205, 0.24, 0.014], ['circle', 0.275, 0.24, 0.014], ['M', 0.195, 0.285], ['Q', 0.24, 0.33, 0.285, 0.285]] }
         ]
       }
     ]

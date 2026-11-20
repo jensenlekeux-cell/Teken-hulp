@@ -2,7 +2,8 @@ package com.example.data
 
 object LessonCatalog {
     val allLessons: List<DrawingLesson> =
-        (LessonCatalogPart1.lessons + LessonCatalogPart2.lessons).sortedBy { it.pathOrder }
+        (LessonCatalogPart1.lessons + LessonCatalogPart2.lessons + LessonCatalogPart3.lessons)
+            .sortedBy { it.pathOrder }
 
     fun findById(id: String?): DrawingLesson? =
         allLessons.firstOrNull { it.id == id }

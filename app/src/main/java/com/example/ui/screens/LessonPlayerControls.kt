@@ -208,12 +208,10 @@ fun VideoPlaybackControlsBar(
 }
 
 @Composable
-fun StepInstructionCard(
-    step: DrawingStep,
+fun TopStepNavigationBar(
     totalSteps: Int,
     currentIndex: Int,
     onSelectStep: (Int) -> Unit,
-    onSpeakInstruction: () -> Unit,
     onPrevious: () -> Unit,
     onNextOrFinish: () -> Unit,
     modifier: Modifier = Modifier
@@ -221,6 +219,94 @@ fun StepInstructionCard(
     val isFirst = currentIndex == 0
     val isLast = currentIndex == totalSteps - 1
 
+    Surface(
+        shape = RoundedCornerShape(18.dp),
+        color = MaterialTheme.colorScheme.surface,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+        tonalElevation = 1.dp,
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
+        ) {
+            OutlinedButton(
+                onClick = onPrevious,
+                enabled = !isFirst,
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp),
+                modifier = Modifier
+                    .minimumInteractiveComponentSize()
+                    .testTag("step_previous_button")
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(modifier = Modifier.width(4.dp))
+                Text("Vorige", style = MaterialTheme.typography.labelLarge)
+            }
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(5.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                for (idx in 0 until totalSteps) {
+                    val active = idx == currentIndex
+                    val done = idx < currentIndex
+                    Box(
+                        modifier = Modifier
+                            .size(if (active) 11.dp else 8.dp)
+                            .clip(CircleShape)
+                            .background(
+                                when {
+                                    active -> MaterialTheme.colorScheme.primary
+                                    done -> MaterialTheme.colorScheme.secondary
+                                    else -> MaterialTheme.colorScheme.outline
+                                }
+                            )
+                            .clickable { onSelectStep(idx) }
+                    )
+                }
+            }
+
+            Button(
+                onClick = onNextOrFinish,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (isLast) {
+                        MaterialTheme.colorScheme.secondary
+                    } else {
+                        MaterialTheme.colorScheme.primary
+                    }
+                ),
+                contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp),
+                modifier = Modifier
+                    .minimumInteractiveComponentSize()
+                    .testTag("step_next_button")
+            ) {
+                Text(
+                    text = if (isLast) "Klaar!" else "Volgende stap",
+                    style = MaterialTheme.typography.labelLarge
+                )
+                Spacer(modifier = Modifier.width(4.dp))
+                Icon(
+                    imageVector = if (isLast) Icons.Filled.Check else Icons.AutoMirrored.Filled.ArrowForward,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun StepInstructionCard(
+    step: DrawingStep,
+    totalSteps: Int,
+    onSpeakInstruction: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Card(
         shape = RoundedCornerShape(22.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -301,76 +387,6 @@ fun StepInstructionCard(
                     color = MaterialTheme.colorScheme.onTertiaryContainer,
                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp)
                 )
-            }
-
-            // Step dots + Vorige / Volgende buttons
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                OutlinedButton(
-                    onClick = onPrevious,
-                    enabled = !isFirst,
-                    contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp),
-                    modifier = Modifier
-                        .minimumInteractiveComponentSize()
-                        .testTag("step_previous_button")
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = null,
-                        modifier = Modifier.size(16.dp)
-                    )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text("Vorige")
-                }
-
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    for (idx in 0 until totalSteps) {
-                        val active = idx == currentIndex
-                        val done = idx < currentIndex
-                        Box(
-                            modifier = Modifier
-                                .size(if (active) 12.dp else 8.dp)
-                                .clip(CircleShape)
-                                .background(
-                                    when {
-                                        active -> MaterialTheme.colorScheme.primary
-                                        done -> MaterialTheme.colorScheme.secondary
-                                        else -> MaterialTheme.colorScheme.outline
-                                    }
-                                )
-                                .clickable { onSelectStep(idx) }
-                        )
-                    }
-                }
-
-                Button(
-                    onClick = onNextOrFinish,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (isLast) {
-                            MaterialTheme.colorScheme.secondary
-                        } else {
-                            MaterialTheme.colorScheme.primary
-                        }
-                    ),
-                    contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp),
-                    modifier = Modifier
-                        .minimumInteractiveComponentSize()
-                        .testTag("step_next_button")
-                ) {
-                    Text(if (isLast) "Klaar!" else "Volgende")
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Icon(
-                        imageVector = if (isLast) Icons.Filled.Check else Icons.AutoMirrored.Filled.ArrowForward,
-                        contentDescription = null,
-                        modifier = Modifier.size(16.dp)
-                    )
-                }
             }
         }
     }

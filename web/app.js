@@ -785,7 +785,7 @@ function renderPlayerUi() {
   const nextBtn = document.getElementById('next-step-btn');
   prevBtn.disabled = state.stepIndex === 0;
   const isLast = state.stepIndex === total - 1;
-  nextBtn.textContent = isLast ? 'Klaar! ✓' : 'Volgende →';
+  nextBtn.textContent = isLast ? 'Klaar! ✓' : 'Volgende stap →';
   nextBtn.classList.toggle('finish', isLast);
 
   const dots = document.getElementById('step-dots');
