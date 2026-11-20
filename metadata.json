@@ -1,0 +1,6 @@
+{
+  "name": "TekenStap",
+  "description": "Leer gemakkelijk tekenen met stap-voor-stap animaties en een interactief schetsboek.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
